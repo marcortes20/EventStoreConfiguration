@@ -10,8 +10,12 @@ namespace Services.EventStore
 {
     public interface IEventStoreService
     {
-        public EventData CreateEvent(Purchase purchase);
+         EventData CreateEvent(Purchase purchase);
 
-        public Task AppendEventToStream(params EventData[] eventData);
+         Task AppendEventToStream(params EventData[] eventData);
+
+        Task TestStream();
+
+
     }
 }

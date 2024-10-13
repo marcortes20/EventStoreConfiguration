@@ -31,13 +31,33 @@ namespace Services.EventStore
 
        async public Task AppendEventToStream( params EventData[] eventData)
         {
-            await _eventStoreClient.AppendToStreamAsync(
-           "PurchaseStream",
-           StreamState.Any,
-           eventData
-           );
+            try
+            {
+                await _eventStoreClient.AppendToStreamAsync(
+                    "sirve",
+                    StreamState.Any,
+                    eventData
+                );
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                Console.WriteLine($"Error appending event: {ex.Message}");
+            }
+
         }
 
-       
+        async public void TestStream()
+        {
+            //var stream = await _eventStoreClient.ReadStreamAsync("sirve", StreamPosition.Start);
+            //if (stream.Status == StreamReadStatus.StreamNotFound)
+            //{
+            //    Console.WriteLine("El stream 'sirve' no existe.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("El stream 'sirve' existe.");
+            }
+        }
     }
 }

@@ -11,15 +11,17 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<EventStoreClient>(sp =>
 {
-    var settings =
-    EventStoreClientSettings.Create("esdb://localhost:2113");
-    settings.DefaultCredentials = new UserCredentials("admin",
-    "changeit");
+    var settings = EventStoreClientSettings.Create("esdb://6055-190-113-111-32.ngrok-free.app");
+   
+    settings.DefaultCredentials = new UserCredentials("admin","changeit");
+
+
     return new EventStoreClient(settings);
+
 });
 
 builder.Services.AddScoped<IEventStoreService, EventStoreService>();
-
+//https://e6bd-190-113-111-32.ngrok-free.app
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,5 +36,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+var url = app.Urls.FirstOrDefault();
+Console.WriteLine(url);
 
 app.Run();
