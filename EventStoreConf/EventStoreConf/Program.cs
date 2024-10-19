@@ -11,12 +11,24 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<EventStoreClient>(sp =>
 {
-    var settings = EventStoreClientSettings.Create("esdb://6055-190-113-111-32.ngrok-free.app");
+    try
+    {
+    var settings = EventStoreClientSettings.Create("esdb://admin:changeit@26.182.137.135:2113?tls=false&tlsVerifyCert=false");
    
-    settings.DefaultCredentials = new UserCredentials("admin","changeit");
+   // settings.DefaultCredentials = new UserCredentials("admin","changeit");
+     
 
 
-    return new EventStoreClient(settings);
+        return new EventStoreClient(settings);
+    }
+    catch (Exception ex)
+    {
+        // Manejo de errores aquí
+        Console.WriteLine($"Error al crear EventStoreClient: {ex.Message}");
+        throw; // O manejarlo según sea necesario
+    }
+
+
 
 });
 

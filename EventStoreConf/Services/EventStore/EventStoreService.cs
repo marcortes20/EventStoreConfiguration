@@ -34,7 +34,7 @@ namespace Services.EventStore
             try
             {
                 await _eventStoreClient.AppendToStreamAsync(
-                    "sirve",
+                    "test",
                     StreamState.Any,
                     eventData
                 );
@@ -47,17 +47,12 @@ namespace Services.EventStore
 
         }
 
-        async public void TestStream()
+   
+
+        Task IEventStoreService.TestStream()
         {
-            //var stream = await _eventStoreClient.ReadStreamAsync("sirve", StreamPosition.Start);
-            //if (stream.Status == StreamReadStatus.StreamNotFound)
-            //{
-            //    Console.WriteLine("El stream 'sirve' no existe.");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("El stream 'sirve' existe.");
-            }
+            throw new NotImplementedException();
         }
     }
-}
+    }
+
